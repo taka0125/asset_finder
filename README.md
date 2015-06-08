@@ -1,8 +1,11 @@
 # AssetFinder
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/asset_finder`. To experiment with that code, run `bin/console` for an interactive prompt.
+Find javascripts and stylesheets for `rake asset:precompile`.
 
-TODO: Delete this and the text above, and describe your gem
+## Build Status
+
+### master
+[![Build Status](https://travis-ci.org/taka0125/asset_finder.svg?branch=master)](https://travis-ci.org/taka0125/asset_finder)
 
 ## Installation
 
@@ -19,10 +22,6 @@ And then execute:
 Or install it yourself as:
 
     $ gem install asset_finder
-
-## Usage
-
-TODO: Write usage instructions here
 
 ## Development
 
