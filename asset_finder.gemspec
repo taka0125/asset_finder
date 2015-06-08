@@ -12,6 +12,7 @@ Gem::Specification.new do |spec|
   spec.summary       = %q{Find javascripts and stylesheets for `rake asset:precompile`.}
   spec.description   = %q{Find javascripts and stylesheets. Configure precompile path.}
   spec.homepage      = "https://github.com/taka0125/asset_finder"
+  spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
   spec.bindir        = "exe"
