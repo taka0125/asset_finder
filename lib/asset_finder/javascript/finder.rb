@@ -11,7 +11,7 @@ module AssetFinder
           Find.find(root_dir).each do |path|
             norimalized_path = norimalizer.norimalize(path)
             next if norimalized_path.nil?
-            paths << path
+            paths << norimalized_path
           end
         end
       end
