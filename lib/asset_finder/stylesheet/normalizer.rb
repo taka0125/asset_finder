@@ -1,22 +1,24 @@
 module AssetFinder
   module Stylesheet
     class Normalizer
-      def initialize(root_dir)
+      DEFAULT_PATTERNS = [
+        /^(.*)\.css\.scss$/,
+        /^(.*)\.css$/,
+        /^(.*)\.scss$/
+      ].freeze
+
+      def initialize(root_dir, patterns = [])
         @root_dir = root_dir.to_s
+        @patterns = patterns + DEFAULT_PATTERNS
       end
 
-      def norimalize(path)
-        if path.match(/^(.*)\.css\.scss$/)
-          return $1.sub(@root_dir, '') + '.css'
+      def normalize(path)
+        @patterns.each do |pattern|
+          if path.match(pattern)
+            return $1.sub(@root_dir, '') + '.css'
+          end
         end
-
-        if path.match(/^(.*)\.css$/)
-          return $1.sub(@root_dir, '') + '.css'
-        end
-
-        if path.match(/^(.*)\.scss$/)
-          return $1.sub(@root_dir, '') + '.css'
-        end
+        nil
       end
     end
   end
