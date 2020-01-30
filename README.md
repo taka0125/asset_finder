@@ -5,7 +5,9 @@ Find javascripts and stylesheets for `rake asset:precompile`.
 ## Build Status
 
 ### master
-[![Build Status](https://travis-ci.org/taka0125/asset_finder.svg?branch=master)](https://travis-ci.org/taka0125/asset_finder)
+[![Build Status](https://github.com/taka0125/asset_finder/workflows/Ruby/badge.svg)
+
+
 
 ## Installation
 
