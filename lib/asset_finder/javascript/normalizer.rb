@@ -15,7 +15,7 @@ module AssetFinder
       def normalize(path)
         @patterns.each do |pattern|
           if path.match(pattern)
-            return $1.sub(@root_dir, '') + '.js'
+            return $1.delete_prefix(@root_dir).delete_suffix('/index') + '.js'
           end
         end
         nil
