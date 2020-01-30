@@ -32,5 +32,10 @@ describe AssetFinder::Javascript::Normalizer do
       let(:path) { "#{root_dir}test/something.js.jsx.coffee" }
       it { is_expected.to eq 'test/something.js' }
     end
+
+    context 'index' do
+      let(:path) { "#{root_dir}test/items/index.coffee" }
+      it { is_expected.to eq 'test/items.js' }
+    end
   end
 end
