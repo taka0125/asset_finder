@@ -4,8 +4,10 @@ describe AssetFinder::Javascript::Normalizer do
   let(:root_dir) { '/data/rails/app/assets/javascripts/' }
 
   describe '#normalize' do
+    subject { AssetFinder::Javascript::Normalizer.new(root_dir, patterns, normalize_index_file: normalize_index_file).normalize(path) }
+
     let(:patterns) { [] }
-    subject { AssetFinder::Javascript::Normalizer.new(root_dir, patterns).normalize(path) }
+    let(:normalize_index_file) { true }
 
     context "extension is 'js'" do
       let(:path) { "#{root_dir}test/something.js" }
@@ -35,7 +37,18 @@ describe AssetFinder::Javascript::Normalizer do
 
     context 'index' do
       let(:path) { "#{root_dir}test/items/index.coffee" }
-      it { is_expected.to eq 'test/items.js' }
+
+      context 'normalize_index_file = true' do
+        let(:normalize_index_file) { true }
+
+        it { is_expected.to eq 'test/items.js' }
+      end
+
+      context 'normalize_index_file = true' do
+        let(:normalize_index_file) { false }
+
+        it { is_expected.to eq 'test/items/index.js' }
+      end
     end
   end
 end
