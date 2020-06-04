@@ -6,7 +6,11 @@ module AssetFinder
       def self.execute
         [].tap do |paths|
           root_dir = File.join(Rails.root, 'app/assets/javascripts/')
-          normalizer = Normalizer.new(root_dir, AssetFinder.configuration.javascript_patterns)
+          normalizer = Normalizer.new(
+            root_dir,
+            AssetFinder.configuration.javascript_patterns,
+            normalize_index_file: AssetFinder.configuration.normalize_index_file
+          )
 
           Find.find(root_dir).each do |path|
             normalized_path = normalizer.normalize(path)
