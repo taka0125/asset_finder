@@ -25,6 +25,26 @@ Or install it yourself as:
 
     $ gem install asset_finder
 
+## config file
+
+`config/initializers/assets_finder.rb`
+
+### Sprockets
+
+```ruby
+Rails.application.config.to_prepare do
+  Rails.application.config.assets.precompile += AssetFinder::SprocketsConfigGenerator.new.execute
+end
+```
+
+### dartsass-rails
+
+```ruby
+Rails.application.config.to_prepare do
+  Rails.application.config.dartsass.builds = AssetFinder::Stylesheet::DartsassConfigGenerator.new.execute
+end
+```
+
 ## Development
 
 After checking out the repo, run `bin/setup` to install dependencies. Then, run `bin/console` for an interactive prompt that will allow you to experiment.

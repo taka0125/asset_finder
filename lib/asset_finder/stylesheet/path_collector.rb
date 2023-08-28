@@ -1,18 +1,23 @@
+require 'find'
+
 module AssetFinder
   module Stylesheet
-    class Normalizer
+    class PathCollector
       def initialize(root_dir:, path_pattern_collection:)
-        @root_dir = root_dir.to_s
+        @root_dir = root_dir
         @path_pattern_collection = path_pattern_collection
 
         freeze
       end
 
-      def normalize(path)
-        match = path_pattern_collection.match(path: path)
-        return unless match
+      def execute
+        [].tap do |paths|
+          Find.find(root_dir).each do |path|
+            next unless path_pattern_collection.match?(path: path)
 
-        match[1].sub(root_dir, '') + '.css'
+            paths << path
+          end
+        end
       end
 
       private
