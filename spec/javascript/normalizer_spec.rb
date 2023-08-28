@@ -1,12 +1,10 @@
-require 'spec_helper'
-
 describe AssetFinder::Javascript::Normalizer do
   let(:root_dir) { '/data/rails/app/assets/javascripts/' }
 
   describe '#normalize' do
-    subject { AssetFinder::Javascript::Normalizer.new(root_dir, patterns, normalize_index_file: normalize_index_file).normalize(path) }
+    subject { AssetFinder::Javascript::Normalizer.new(root_dir: root_dir, path_pattern_collection: path_pattern_collection, normalize_index_file: normalize_index_file).normalize(path) }
 
-    let(:patterns) { [] }
+    let(:path_pattern_collection) { AssetFinder::Javascript::PathPatternCollection.build }
     let(:normalize_index_file) { true }
 
     context "extension is 'js'" do
@@ -32,6 +30,15 @@ describe AssetFinder::Javascript::Normalizer do
     context "add pattern" do
       let(:patterns) { [/^(.*)\.js\.jsx\.coffee$/] }
       let(:path) { "#{root_dir}test/something.js.jsx.coffee" }
+
+      before do
+        AssetFinder.config.javascript_patterns = patterns
+      end
+
+      after do
+        AssetFinder.config.javascript_patterns = []
+      end
+
       it { is_expected.to eq 'test/something.js' }
     end
 

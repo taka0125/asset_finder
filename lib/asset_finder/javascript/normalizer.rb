@@ -1,28 +1,26 @@
 module AssetFinder
   module Javascript
     class Normalizer
-      DEFAULT_PATTERNS = [
-        /^(.*)\.js\.coffee$/,
-        /^(.*)\.coffee$/,
-        /^(.*)\.js$/
-      ].freeze
-
-      def initialize(root_dir, patterns = [], normalize_index_file: true)
+      def initialize(root_dir:, path_pattern_collection:, normalize_index_file: true)
         @root_dir = root_dir.to_s
-        @patterns = patterns + DEFAULT_PATTERNS
+        @path_pattern_collection = path_pattern_collection
         @normalize_index_file = normalize_index_file
+
+        freeze
       end
 
       def normalize(path)
-        @patterns.each do |pattern|
-          if path.match(pattern)
-            normalized_path = $1.delete_prefix(@root_dir)
-            normalized_path = normalized_path.delete_suffix('/index') if @normalize_index_file
-            return normalized_path + '.js'
-          end
-        end
-        nil
+        match = path_pattern_collection.match(path: path)
+        return unless match
+
+        normalized_path = match[1].delete_prefix(root_dir)
+        normalized_path = normalized_path.delete_suffix('/index') if normalize_index_file
+        normalized_path + '.js'
       end
+
+      private
+
+      attr_reader :root_dir, :path_pattern_collection, :normalize_index_file
     end
   end
 end

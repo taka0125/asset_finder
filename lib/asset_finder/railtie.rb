@@ -9,8 +9,6 @@ module AssetFinder
         config.javascript_patterns = Rails.application.config.asset_finder.javascript_patterns
         config.stylesheet_patterns = Rails.application.config.asset_finder.stylesheet_patterns
       end
-
-      Rails.application.config.assets.precompile += AssetFinder::Finder.execute
     end
   end
 end
