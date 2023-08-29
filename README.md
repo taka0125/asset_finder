@@ -27,7 +27,7 @@ Or install it yourself as:
 
 ## config file
 
-`config/initializers/assets_finder.rb`
+`config/initializers/asset_finder.rb`
 
 ### Sprockets
 
