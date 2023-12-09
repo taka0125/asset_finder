@@ -1,0 +1,17 @@
+version: '3'
+
+services:
+  ruby:
+    image: ruby:3.2
+    command: sleep infinity
+    working_dir: /app
+    volumes:
+      - .:/app:cached
+      - bundle:/bundle
+    environment:
+      - HISTFILE=/app/.bash_history
+      - BUNDLE_PATH=/bundle
+      - BUNDLE_JOBS=4
+
+volumes:
+  bundle:
