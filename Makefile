@@ -15,7 +15,14 @@ convert:
 	$(DOCKER_COMPOSE) convert
 setup: up
 	$(DOCKER_COMPOSE) exec ruby bash -c 'bin/setup'
-ruby/bash:
+bundle/install: up
+	$(DOCKER_COMPOSE) exec ruby bash -c 'bundle install'
+ruby/bash: up
 	$(DOCKER_COMPOSE) exec ruby bash
 ruby/rspec: up
 	$(DOCKER_COMPOSE) exec ruby bash -c 'bundle exec rspec'
+ruby/appraisal/generate: up
+	$(DOCKER_COMPOSE) exec ruby bash -c 'bundle exec appraisal generate'
+gem/release:
+	@read -p "Enter OTP code: " otp_code; \
+	gh workflow run release.yml -f rubygems-otp-code="$$otp_code"
