@@ -2,6 +2,7 @@
 
 source "https://rubygems.org"
 
-gem "railties", "~> 7.0.0"
+gem "ostruct"
+gem "railties", "~> 8.0.0"
 
 gemspec path: "../"
