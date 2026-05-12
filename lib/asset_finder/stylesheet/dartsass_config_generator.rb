@@ -16,8 +16,9 @@ module AssetFinder
         {}.tap do |results|
           path_collector.execute.each do |path|
             key = path.delete_prefix(root_dir)
-            value = normalizer.normalize(path)
+            next if File.basename(key).start_with?('_')
 
+            value = normalizer.normalize(path)
             results[key] = value
           end
         end
